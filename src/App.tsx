@@ -1,17 +1,18 @@
 import { useState } from 'react'
+import { Route, Routes, useNavigate } from 'react-router'
 import './App.css'
 
 function createRoom(playerCount: number) {
-  return Promise.resolve({ playerCount })
+  return Promise.resolve({ id: `mock-${Date.now()}`, playerCount })
 }
 
-function App() {
+function StartScreen() {
   const [playerCount, setPlayerCount] = useState(4)
-  const [room, setRoom] = useState<{ playerCount: number } | null>(null)
+  const navigate = useNavigate()
 
   async function handleCreateRoom() {
     const createdRoom = await createRoom(playerCount)
-    setRoom(createdRoom)
+    navigate(`/rooms/${createdRoom.id}`)
   }
 
   return (
@@ -39,8 +40,25 @@ function App() {
       <button type="button" onClick={handleCreateRoom}>
         방 만들기
       </button>
-      {room && <div>QR임</div>}
     </main>
+  )
+}
+
+function RoomScreen() {
+  return (
+    <main className="start-screen">
+      <h1>방 입장 QR</h1>
+      <div>QR임</div>
+    </main>
+  )
+}
+
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<StartScreen />} />
+      <Route path="/rooms/:roomId" element={<RoomScreen />} />
+    </Routes>
   )
 }
 
