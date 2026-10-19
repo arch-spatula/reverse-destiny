@@ -2,6 +2,8 @@
 
 질문으로 운세 명식을 역으로 맞추는 보드게임
 
+배포 사이트: [https://reverse-destiny.vercel.app/](https://reverse-destiny.vercel.app/)
+
 > Source code is publicly available for portfolio and review purposes.
 >
 > Unless otherwise stated, no license is granted to copy, modify, redistribute, or commercially use this project.
