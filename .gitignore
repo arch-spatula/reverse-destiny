@@ -25,3 +25,7 @@ dist-ssr
 
 # Obsidian workspace state
 .obsidian/workspace*.json
+
+# Codex Panel build artifacts
+.obsidian/plugins/codex-panel/main.js
+.obsidian/plugins/codex-panel/styles.css
