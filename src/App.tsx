@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { Route, Routes, useNavigate } from 'react-router'
+import { QRCodeSVG } from 'qrcode.react'
+import { Route, Routes, useLocation, useNavigate } from 'react-router'
 import './App.css'
 
 function createRoom(playerCount: number) {
@@ -45,10 +46,19 @@ function StartScreen() {
 }
 
 function RoomScreen() {
+  const { pathname } = useLocation()
+  const roomUrl = new URL(pathname, window.location.origin).href
+
   return (
     <main className="start-screen">
       <h1>방 입장 QR</h1>
-      <div>QR임</div>
+      <QRCodeSVG
+        value={roomUrl}
+        size={256}
+        marginSize={4}
+        level="M"
+        title="방 입장 QR 코드"
+      />
     </main>
   )
 }
