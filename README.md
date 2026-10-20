@@ -35,3 +35,7 @@ bun run lint
 ```
 
 빌드 결과는 `dist/`에 생성됩니다. `bun run preview`로 빌드 결과를 로컬에서 확인할 수 있습니다.
+
+## 협업 규칙
+
+브랜치, 커밋, PR 및 병합 규칙은 [Git 컨벤션](docs/git-conventions.md)을 따릅니다.
