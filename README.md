@@ -16,7 +16,7 @@
 
 Bun과 Vite 기반의 React + TypeScript 프로젝트입니다.
 
-로컬 API 개발은 [별도 API 서버와 Vite 프록시를 사용하는 방식](docs/ADR/2026-09-08-003-local-api-vite-proxy.md)으로 진행합니다. 현재는 방식만 결정했으며, API 서버와 프록시 설정은 아직 구현하지 않았습니다.
+로컬 API 개발은 [별도 API 서버와 Vite 프록시를 사용하는 방식](docs/ADR/2026-09-08-003-local-api-vite-proxy.md)으로 진행합니다. 방 ID 발급 API는 [서버 방 ID 발급 스펙](docs/spec/room-id-generation.md)을 따릅니다.
 
 ## 설치 및 실행
 
@@ -27,9 +27,18 @@ bun install
 bun run dev
 ```
 
+별도 터미널에서 로컬 API 서버도 실행합니다.
+
+```bash
+bun run dev:api
+```
+
+Vite의 `/api` 요청은 `127.0.0.1:3001`의 Bun API 서버로 전달됩니다. 배포 환경에서는 같은 핸들러를 Vercel Functions의 Node.js 런타임에서 실행합니다. 현재는 방 ID만 발급하며 방 정보를 저장하거나 존재 여부를 확인하지 않습니다.
+
 ## 빌드 및 검사
 
 ```bash
+bun test
 bun run build
 bun run lint
 ```
