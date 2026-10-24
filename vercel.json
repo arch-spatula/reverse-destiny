@@ -4,6 +4,10 @@
     {
       "source": "/rooms/:roomId",
       "destination": "/index.html"
+    },
+    {
+      "source": "/rooms/:roomId/join",
+      "destination": "/index.html"
     }
   ]
 }
