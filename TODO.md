@@ -16,7 +16,7 @@
 - [ ] 좌석 중복 방지 및 전원 확정 시 좌석 고정
 - [ ] 공유 정보와 비공개 정보의 접근 범위 적용
 
-관련 스펙: [시작 화면](docs/spec/start-screen.md), [방 만들기](docs/spec/room-creation.md)
+관련 스펙: [시작 화면](docs/spec/start-screen.md), [방 만들기](docs/spec/room-creation.md), [방 입장](docs/spec/room-entry.md)
 
 ## 게임 진행
 
@@ -32,3 +32,13 @@
 
 - [ ] 사전 / 위키: 명칭, 수록 내용과 화면 구성 구체화
 - [ ] 설문: 목적, 참여 대상, 문항과 노출 시점 결정
+
+---
+
+
+```
+$software-factory docs/spec/room-entry.md를 구현해줘.
+입장 정보 항목은 docs/spec/room-creation.md를 참고해줘.
+```
+
+
