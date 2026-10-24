@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { QRCodeSVG } from 'qrcode.react'
-import { Route, Routes, useLocation, useNavigate } from 'react-router'
+import { Route, Routes, useNavigate, useParams } from 'react-router'
 import './App.css'
 
 async function createRoom(playerCount: number): Promise<{ id: string; playerCount: number }> {
@@ -66,19 +66,78 @@ function StartScreen() {
 }
 
 function RoomScreen() {
-  const { pathname } = useLocation()
-  const roomUrl = new URL(pathname, window.location.origin).href
+  const { roomId } = useParams()
+  const joinUrl = new URL(
+    `/rooms/${encodeURIComponent(roomId!)}/join`,
+    window.location.origin,
+  ).href
 
   return (
     <main className="start-screen">
       <h1>방 입장 QR</h1>
       <QRCodeSVG
-        value={roomUrl}
+        value={joinUrl}
         size={256}
         marginSize={4}
         level="M"
         title="방 입장 QR 코드"
       />
+      <a
+        className="join-button"
+        href={joinUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-describedby="join-hint"
+      >
+        입장
+      </a>
+      <p id="join-hint">새 탭으로 열립니다.</p>
+    </main>
+  )
+}
+
+function JoinScreen() {
+  const [birthTimeUnknown, setBirthTimeUnknown] = useState(false)
+
+  return (
+    <main className="start-screen">
+      <h1>입장 정보</h1>
+      <form className="join-form" onSubmit={(event) => event.preventDefault()}>
+        <label>
+          생년월일
+          <input name="birthDate" type="date" required />
+        </label>
+        <label>
+          태어난 시간
+          <input
+            name="birthTime"
+            type="time"
+            required={!birthTimeUnknown}
+            disabled={birthTimeUnknown}
+          />
+        </label>
+        <label>
+          <input
+            name="birthTimeUnknown"
+            type="checkbox"
+            checked={birthTimeUnknown}
+            onChange={(event) => setBirthTimeUnknown(event.target.checked)}
+          />
+          모름
+        </label>
+        <label>
+          태어난 도시
+          <input name="birthCity" type="text" required />
+        </label>
+        <label>
+          성별
+          <select name="gender" defaultValue="" required>
+            <option value="" disabled>선택해주세요</option>
+            <option value="female">여성</option>
+            <option value="male">남성</option>
+          </select>
+        </label>
+      </form>
     </main>
   )
 }
@@ -88,6 +147,7 @@ function App() {
     <Routes>
       <Route path="/" element={<StartScreen />} />
       <Route path="/rooms/:roomId" element={<RoomScreen />} />
+      <Route path="/rooms/:roomId/join" element={<JoinScreen />} />
     </Routes>
   )
 }
